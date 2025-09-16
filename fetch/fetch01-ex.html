@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        img{
+            width: 200px;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>상품 정보</h1>
+    <div id="output">
+        상품을 불러오는 중 ...
+        
+    </div>
+    <script>
+      fetch("https://fakestoreapi.com/products/1")
+        .then((res) => {
+          //   console.log(res);
+          return res.json(); //json 변환
+        })
+        .then((data) =>{
+            console.log(data);
+            const output = document.getElementById("output")
+            output.innerHTML= `
+            <p>상품명 : ${data.title} </p>
+            <p>가격 : ${data.price}</p>
+            <img src="${data.image}" alt="${data.description}">
+            <p>설명 : ${data.description}</p>
+            `
+
+            
+        })
+        .catch(function (error) {
+          console.error(`error : ${error}`);
+        });
+    </script>
+  </body>
+</html>
