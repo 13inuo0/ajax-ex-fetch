@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const xhr = new XMLHttpRequest();
+      console.log(xhr);
+
+      xhr.open("GET", "data.json", true);
+      xhr.onload = function () {
+        console.log(xhr);
+        // 200 요청 성공(데이터 잘 가져옴)
+        // 400 클라이언트 오류 ex)) 파일경로를 잘 못 잡은경우
+        // 500 서버오류
+        if (xhr.staus === 200) {
+          // JSON.parse() 문자열(JSON형식) => 자바스크립트 객체로 변환해준다.
+          const data = JSON.parse(xhr.responseText);
+          console.log(data);
+          document.write(`이름 : ${data.name} , 나이 :${data.age} `);
+        }
+      };
+      xhr.send();
+
+      const obj = JSON.parse('{"title":"커피","price":5}');
+      console.log(obj);
+      
+    </script>
+  </body>
+</html>
